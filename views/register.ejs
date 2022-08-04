@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Registro</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <script
+      src="https://use.fontawesome.com/releases/v6.1.0/js/all.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Google fonts-->
+    <link
+      href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="/css/styles.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="mt-5"><h1>Registrar nuevo usuario</h1></div>
+      <div class="mt-5 mb-1">
+        <form id="form" action="/register" method="post">
+          <label for="title" class="form-label">Nombre</label>
+          <input
+            name="firstname"
+            id="firstname"
+            class="form-control"
+            type="text"
+            aria-label="default input example"
+            required
+          />
+          <label for="title" class="form-label">Apellido</label>
+          <input
+            name="lastname"
+            id="lastname"
+            class="form-control"
+            type="text"
+            aria-label="default input example"
+            required
+          />
+          <label for="title" class="form-label">Email</label>
+          <input
+            name="email"
+            id="email"
+            class="form-control"
+            type="email"
+            aria-label="default input example"
+            required
+          />
+          <br />
+          <label for="user" class="form-label">Contraseña</label>
+          <input
+            name="password"
+            id="password"
+            class="form-control"
+            type="password"
+            aria-label="default input example"
+            required
+          />
+          <button type="submit" class="btn btn-success mt-3">Registrarse</button>
+        </form>
+      </div>
+      <a href="/" class="link-primary text-decoration-none m-1">← Volver</a>
+    </div>
+  </body>
+</html>
