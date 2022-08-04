@@ -7,13 +7,9 @@ async function showJson(req, res) {
 }
 
 async function showAdmin(req, res) {
-//  if (req.isAutenticated()) {
-//   res.render("admin");
-
-//  }
-//  else {
-//   res.redirect("/login");
-//  }
+  if (!req.isAuthenticated()){
+    return res.redirect("/login")
+  }
   const articles = await Article.findAll({ include: User });
   res.render("admin", { articles, format });
 }

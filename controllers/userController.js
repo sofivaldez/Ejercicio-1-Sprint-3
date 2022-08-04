@@ -3,7 +3,7 @@ const { User } = require("../models");
 
 // Display a listing of the resource.
 async function index(req, res) {}
- 
+
 // Display the specified resource.
 async function showLogin(req, res) {
   res.render("login");
@@ -11,29 +11,38 @@ async function showLogin(req, res) {
 
 // Show the form for creating a new resource
 async function create(req, res) {
-  const [user, created] = await User.findOrCreate({ where: { 
-    firstname: req.body.firstname, 
-    lastname: req.body.lastname, 
-    email: req.body.email, password: 
-    req.body.password},
+  const [user, created] = await User.findOrCreate({
+    where: {
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
+      email: req.body.email,
+      password: req.body.password,
+    },
   });
 
-  if (created) {    
-    req.login(user, () => res.redirect("/admin"));  
-  } else {    
-  res.redirect("/register");  
-  }};
-
+  if (created) {
+    req.login(user, () => res.redirect("/admin"));
+  } else {
+    res.redirect("/register");
+  }
+}
 
 // Store a newly created resource in storage.
-async function store(req, res) {}
+// async function logout(req, res) {
+//   req.logout(function (err) {
+//     if (err) {
+//       return next(err);
+//     }
+//     res.redirect("/");
+//   });
+// }
 
 // Show the form for editing the specified resource.
 async function login(req, res) {
-  passport.authenticate("local", {
+  return passport.authenticate("local", {
     successRedirect: "/admin",
-    failureRedirect: "/login", 
-  })
+    failureRedirect: "/login",
+  })(req, res);
 }
 
 // Update the specified resource in storage.
@@ -46,6 +55,7 @@ async function showRegister(req, res) {
   res.render("register");
 }
 
+async function logout(req, res) {}
 // Otros handlers...
 // ...
 
@@ -58,4 +68,5 @@ module.exports = {
   update,
   destroy,
   showRegister,
+  logout,
 };
