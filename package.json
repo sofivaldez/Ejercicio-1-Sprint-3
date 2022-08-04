@@ -10,7 +10,6 @@
   "author": "Hack Academy",
   "license": "ISC",
   "dependencies": {
-    "alert-node": "^5.0.3",
     "bcryptjs": "^2.4.3",
     "date-fns": "^2.29.1",
     "dotenv": "^10.0.0",

@@ -16,7 +16,7 @@ routes(app);
 //Borra las imagenes que haya guardadas
 fs.emptyDir("public/assets/img");
 
-// dbInitialSetup(); // Crea tablas e inserta datos de prueba.
+dbInitialSetup(); // Crea tablas e inserta datos de prueba.
 
 app.listen(APP_PORT, () => {
   console.log(`[Express] Servidor corriendo en el puerto ${APP_PORT}.`);
