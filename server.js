@@ -1,15 +1,37 @@
 require("dotenv").config();
+const session =require("express-session");
+const passport =require("passport");
+const LocalStrategy =require("passport-local");
+
 
 const express = require("express");
 const routes = require("./routes");
 const dbInitialSetup = require("./dbInitialSetup");
 const fs = require("fs-extra");
+const User = require("./models/User");
 const APP_PORT = process.env.APP_PORT || 3000;
 const app = express();
 
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
+app.use(session({secret:"AlgúnTextoSuperSecreto",resave:false, saveUninitialized: false,}));
+app.use(passport.session());
+passport.use(new LocalStrategy({
+  usernameField: "email" }, async (email, password, done) => {
+    const user = await User.findOne({ where: { email: email}}, {raw: true});
+    if (!user) {
+      return done(null, false, { message: "Credenciales invalidas"});
+    }
+    // const compare = bcrypt.compare(password, user.password);
+
+    if (!user.password !== password) {
+      return done(null, false, { message: "Credenciales invalidas"});
+    }
+      return done(null, user);
+   }
+  ));
+
 
 routes(app);
 
