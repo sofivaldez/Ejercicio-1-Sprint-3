@@ -1,3 +1,4 @@
+const bcrypt = require("bcrypt");
 module.exports = (sequelize, Model, DataTypes) => {
   class User extends Model {}
 
@@ -15,12 +16,11 @@ module.exports = (sequelize, Model, DataTypes) => {
       lastname: {
         type: DataTypes.STRING,
         allow_null: false,
+        unique: true,
       },
       email: {
         type: DataTypes.STRING,
         allow_null: false,
-        validate: { isEmail: true },
-        unique: true,
       },
       password: {
         type: DataTypes.STRING,
@@ -29,6 +29,16 @@ module.exports = (sequelize, Model, DataTypes) => {
     {
       sequelize,
       modelName: "user",
+      hooks: {
+        beforeBulkCreate: async (users, options) => {
+          for (const user of users) {
+            user.password = await bcrypt.hash(user.password, 10);
+          }
+          beforeCreate: async (user, options) => {
+            user.password = await bcrypt.hash(user.password, 10);
+          };
+        },
+      },
     },
   );
 

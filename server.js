@@ -26,9 +26,9 @@ passport.use(
       if (!user) {
         return done(null, false, { message: "Credenciales invalidas" });
       }
-      // const compare = bcrypt.compare(password, user.password);
+      const compare = await bcrypt.compare(password, user.password);
 
-      if (user.password !== password) {
+      if (!compare) {
         return done(null, false, { message: "Credenciales invalidas" });
       }
       return done(null, user);
@@ -54,7 +54,7 @@ routes(app);
 //Borra las imagenes que haya guardadas
 fs.emptyDir("public/assets/img");
 
-dbInitialSetup(); // Crea tablas e inserta datos de prueba.
+// dbInitialSetup(); // Crea tablas e inserta datos de prueba.
 
 app.listen(APP_PORT, () => {
   console.log(`[Express] Servidor corriendo en el puerto ${APP_PORT}.`);
